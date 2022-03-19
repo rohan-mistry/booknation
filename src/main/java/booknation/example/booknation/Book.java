@@ -7,8 +7,8 @@ public class Book {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -17,16 +17,23 @@ public class Book {
     private String author;
 
     @Column(name = "price")
-    private String price;
+    private int price;
 
-    @Column(name = "picByte", length = 1000)
-    private byte[] picByte;
+    public Book() {
+    }
 
-    public Long getId() {
+    public Book(long id, String name, String author, int price) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.price = price;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -46,19 +53,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
-    }
-
-    public byte[] getPicByte() {
-        return picByte;
-    }
-
-    public void setPicByte(byte[] picByte) {
-        this.picByte = picByte;
     }
 }
