@@ -3,11 +3,8 @@ package com.example.booknation.controllers;
 import com.example.booknation.models.Book;
 import com.example.booknation.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -21,7 +18,10 @@ public class BookController {
     public List<Book> getBooks() {
         return bookRepository.findAll();
     }
-
+    @GetMapping("/search")
+    public List<Book> searchBooks(@RequestParam String name) {
+        return bookRepository.findByNameContaining(name);
+    }
     @GetMapping("/getBookById/{id}")
     public Book getBookById(@PathVariable Long id){
             return bookRepository.findById(id).get();
