@@ -17,15 +17,15 @@
     <form th:action="@{/create_book}" th:object="${book}" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Title</label>
-            <input type="text" th:field="*{name}" class="form-control" id="name">
+            <input maxlength="255" type="text" th:field="*{name}" class="form-control" id="name">
         </div>
         <div class="mb-3">
             <label for="author" class="form-label">Author</label>
-            <input type="text" th:field="*{author}" class="form-control" id="author">
+            <input maxlength="255" type="text" th:field="*{author}" class="form-control" id="author">
         </div>
         <div class="mb-3">
             <label for="coverPhoto" class="form-label">Cover Photo</label>
-            <input type="text" th:field="*{coverPhoto}" class="form-control" id="coverPhoto">
+            <input maxlength="255" type="text" th:field="*{coverPhoto}" class="form-control" id="coverPhoto">
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>
@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" th:field="*{description}" id="description" rows="3"></textarea>
+            <textarea maxlength="255" class="form-control" th:field="*{description}" id="description" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

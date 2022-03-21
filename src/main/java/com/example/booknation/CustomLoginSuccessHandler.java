@@ -33,7 +33,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
             throws IOException {
 
         handle(request, response, authentication);
-        clearAuthenticationAttributes(request);
     }
 
     protected void handle(
@@ -69,13 +68,5 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         }
 
         return "/login?error=true";
-    }
-
-    protected void clearAuthenticationAttributes(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return;
-        }
-        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 }
