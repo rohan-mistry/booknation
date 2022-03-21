@@ -25,16 +25,16 @@ public class Book {
     @Column(name = "coverPhoto")
     private String coverPhoto;
 
+    public Book() {
+
+    }
+
     public Book(String name, String author, Double price, String description, String coverPhoto) {
         this.name = name;
         this.author = author;
         this.price = price;
         this.description = description;
         this.coverPhoto = coverPhoto;
-    }
-
-    public Book() {
-
     }
 
     public Long getId() {
