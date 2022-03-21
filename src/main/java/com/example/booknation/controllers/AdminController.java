@@ -2,6 +2,7 @@ package com.example.booknation.controllers;
 import com.example.booknation.models.Book;
 import com.example.booknation.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
