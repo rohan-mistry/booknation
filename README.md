@@ -13,7 +13,14 @@ CREATE DATABASE booknation;
 - From the root folder of the application, follow these steps.
 - Inside the application.properties, change the database username and password as per your mysql root user and password of your server
 - Run the spring boot application, in the terminal by the command './mvnw clean spring-boot:run' that will create the necessary tables in the db.
-- From postman, create a post request on the server on the route "http://localhost:8080/api/auth/signup" with json request body
+- Create the `ROLE_USER` and `ROLE_ADMIN` in the already created roles tables in our database.
+```
+  INSERT INTO roles(name) VALUES('ROLE_USER');
+  INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+```
+### Creating an admin account for adding books
+- From postman, create a post request on the server on the route "http://localhost:8080/api/auth/signup" with json request body.
+- Example:
  ```
 {
     "username": "admin",
@@ -24,6 +31,6 @@ CREATE DATABASE booknation;
 
 ```
 - This creates an admin account for the application
-- Go to "http://localhost:8080/login", enter the admin username and password. It will be redirected to the admin page.
-- Create a new book and submit
-- Re-run the spring boot application by the command './mvnw clean spring-boot:run'
+### Add books in the database
+- Go to "http://localhost:3000/signin" of client application, enter the admin username and password. It will be redirected to the admin page.
+- Create a new book and submit.

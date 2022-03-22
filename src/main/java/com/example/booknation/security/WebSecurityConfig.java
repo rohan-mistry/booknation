@@ -1,5 +1,4 @@
 package com.example.booknation.security;
-import com.example.booknation.CustomLoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +15,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.example.booknation.security.jwt.AuthEntryPointJwt;
 import com.example.booknation.security.jwt.AuthTokenFilter;
 import com.example.booknation.security.services.UserDetailsServiceImpl;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,8 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
 
-	@Autowired
-	private CustomLoginSuccessHandler successHandler;
 	@Autowired
 	private AuthEntryPointJwt unauthorizedHandler;
 	@Bean
@@ -51,22 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.
-			formLogin()
-				.loginPage("/login")
-				.successHandler(successHandler)
-				.failureUrl("/login?error=true")
-				.permitAll()
-				.and()
-			.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/");
+
 		http.cors().and().csrf().disable()
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/api/test/**","/api/book/**").permitAll()
-			.antMatchers("/api/user/**").hasRole("USER");
+			.antMatchers("api/admin/**").hasRole("ADMIN")
+			.antMatchers("/api/user/**").hasAnyRole("USER","ADMIN");
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
